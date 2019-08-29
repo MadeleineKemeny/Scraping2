@@ -2,7 +2,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
-const newyorker = require("./theonion");
+const theonion = require("./theonion");
 const models = require("./models");
 
 const app = express();
@@ -18,52 +18,52 @@ app.set('view engine', 'handlebars');
 // db
 const MONGODB_ONION = process.env.MONGODB_ONION || 'mongodb://localhost/theonion';
 mongoose.connect(MONGODB_ONION, {useNewUrlParser: true});
-const News = models.News;
+const Items = models.Items;
 const Comment = models.Comment;
 
 
 // routes
 app.get('/', (req, res) => {
-    News.find({}).sort({ date: -1 })
-        .then((news) => {
+    Items.find({}).sort({ date: -1 })
+        .then((items) => {
             res.render('index', {
-                news: news
+                items: items
             })
         })
 });
 
 
-app.get('/news/:id', (req, res) => {
+app.get('/items/:id', (req, res) => {
     const id = req.params.id;
     News.findById(id).populate("comments").exec()
-        .then((news) => {
-            res.render("details", news);
+        .then((items) => {
+            res.render("details", items);
         });
 });
 
 
-app.post('/news/:id/comments', (req, res) => {
-    const newsId = req.params.id;
+app.post('/items/:id/comments', (req, res) => {
+    const itemsId = req.params.id;
     const commentText = req.body.text;
 
     // to leave a comment
     Comment.create({ text: commentText, date: new Date() })
         .then((comment) => {
-            // if created successfully, attach to correct item with comment's id to the news `comments` array
-            // { new: true } return the updated news -- it returns the original by default
+            // if created successfully, attach to correct item with comment's id to the items' `comments` array
+            // { new: true } return the updated items (returns the original by default)
 
-            return News.findByIdAndUpdate(newsId, { $push: { comments: comment._id } }, { new: true })
+            return Items.findByIdAndUpdate(itemsId, { $push: { comments: comment._id } }, { new: true })
         })
-        .then((news) => {
-            res.redirect("/news/" + newsId);
+        .then((items) => {
+            res.redirect("/items/" + itemsId);
         })
 });
 
-app.delete('/news/:newsId/comments/:commentId', (req, res) => {
-    const newsId = req.params.newsId;
+app.delete('/items/:itemsId/comments/:commentId', (req, res) => {
+    const itemsId = req.params.itemsId;
     const commentId = req.params.commentId;
 
-    Article.findByIdAndUpdate(newsId, { $pull: { comments: commentId } })
+    Article.findByIdAndUpdate(itemsId, { $pull: { comments: commentId } })
         .then(() => {
             Comment.findByIdAndDelete(commentId)
                 .then(() => res.sendStatus(200));
@@ -73,13 +73,13 @@ app.delete('/news/:newsId/comments/:commentId', (req, res) => {
 
 
 app.post("/api/scrape", (req, res) => {
-    newyorker.scrape(function (newsArticles) {
+    theonion.scrape(function (newsItems) {
 
         // add all news items to db
-        News.insertMany(localNews, { ordered: false }, function (err, news) {
+        News.insertMany(localNews, { ordered: false }, function (err, items) {
             if (!err) {
-                console.log("Articles inserted: " + news.length);
-                res.json({ count: news.length });
+                console.log("Articles inserted: " + items.length);
+                res.json({ count: items.length });
             }
             else if (err.result.ok) {
                 // avoiding duplicates

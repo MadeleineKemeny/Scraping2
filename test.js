@@ -1,6 +1,6 @@
-const theonion = require("./the onion");
+const theonion = require("./theonion");
 
-theonion.scrape(function (localNews) {
+theonion.scrape(function (newsItems) {
     console.log("Found local news at The Onion");
-    console.log(localNews);
+    console.log(newsItems);
 });

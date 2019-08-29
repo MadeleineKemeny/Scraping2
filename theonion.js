@@ -11,23 +11,23 @@ function scrape(callback) {
 
             // cheerio parses html
             const $ = cheerio.load(html);
-            const news = $("");
-            console.log("Found " + news.length + " items you might enjoy!");
+            const items = $("");
+            console.log("Found " + items.length + " items you might enjoy!");
 
-            var newsArticles = [];
+            var newsItems = [];
 
             // details from each news item
-            for (var i=0; i<news.length; i++) {
-                var news = $(news.get(i));
-                var headline = news.find("h1").text();
-                var description = news.find("p").text();
-                var date = news.find(".js_meta-time").text();
-                var img_url = article.find("img").attr("srcset");
-                var url = news.find("js_link").attr("href");
+            for (var i=0; i<items.length; i++) {
+                var item = $(items.get(i));
+                var headline = items.find("h1").text();
+                var description = item.find("p").text();
+                var date = item.find(".js_meta-time").text();
+                var img_url = item.find("img").attr("srcset");
+                var url = item.find("js_link").attr("href");
 
                 
 
-                var localNews = {
+                var newsItems = {
                     headline: headline,
                     description: description,
                     date: date,
@@ -38,7 +38,7 @@ function scrape(callback) {
                 localNews.push(localNews);
             }
 
-            callback(localNews);
+            callback(newsItems);
 
         });
 }
