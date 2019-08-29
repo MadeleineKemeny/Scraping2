@@ -1,0 +1,33 @@
+<div class="card-columns">
+
+    {{#each news}}
+
+        <div class="card border-dark">
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="https://www.theonion.com/{{url}}">
+                        {{heading}}
+                    </a>
+                </h5>
+                <p class="card-text">{{description}}</p>
+                <p class="date">{{date}}</p>
+                <a href="/news/{{_id}}">{{comments.length}} Comments</a>
+            </div>
+
+            <img src="{{img_url}}" class="card-img-top" alt="news image">
+
+        </div>
+
+    {{else}}
+
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title">No news might not be good news?</h5>
+            </div>
+        </div>
+
+    {{/each}}
+    
+</div>
