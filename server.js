@@ -3,7 +3,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const theonion = require("./theonion");
-const models = require("./models");
+const dB = require("./models");
 const app = express();
 
 // middleware
@@ -17,8 +17,8 @@ app.set('view engine', 'handlebars');
 // db
 const MONGODB_ONION = process.env.MONGODB_ONION || 'mongodb://localhost/theonion';
 mongoose.connect(MONGODB_ONION, {useNewUrlParser: true});
-const Item = models.Item;
-const Comment = models.Comment;
+// const Item = models.Item;
+// const Comment = models.Comment;
 
 // routes
 app.get('/', (req, res) => {
@@ -50,7 +50,7 @@ app.post('/items/:id/comments', (req, res) => {
             // if created successfully, attach to correct item with comment's id to the items' `comments` array
             // { new: true } return the updated items (returns the original by default)
 
-            return Items.findByIdAndUpdate(itemId, { $push: { comments: comment._id } }, { new: true })
+            return Item.findByIdAndUpdate(itemId, { $push: { comments: comment._id } }, { new: true })
         })
         .then((item) => {
             res.redirect("/items/" + itemId);
@@ -70,11 +70,11 @@ app.delete('/items/:itemId/comments/:commentId', (req, res) => {
 });
 
 
-app.post("/api/scrape", (req, res) => {
-    theonion.scrape(function (newsItems) {
+app.get("/api/scrape", (req, res) => {
+    theonion(function (localNews) {
 
         // add all news items to db
-        Item.insertMany(newsItems, { ordered: false }, function (err, items) {
+        News.insertMany(localNews, { ordered: false }, function (err, items) {
             if (!err) {
                 console.log("News items inserted: " + items.length);
                 res.json({ count: items.length });
