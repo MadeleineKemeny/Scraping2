@@ -27,7 +27,7 @@
 {{#each comments}}
     <div class="comment">
         <p class="date">{{date}}</p>
-        <button class="btn btn-danger" style="float: right" onclick="deleteComment('{{../_id}}', '{{_id}}')">Nevermind.</button>
+        <button class="btn btn-danger" onclick="deleteComment('{{../_id}}', '{{_id}}')">Nevermind.</button>
         <p>{{text}}</p>
     </div>
 {{/each}}
