@@ -28,12 +28,12 @@ The following languages, libraries, dependencies, databases and frameworks make 
 
 1. Clone the repo to your computer.
 2. Have all the bits and pieces listed above; some are actual downloads, some are simply accessed by running "npm install" in your terminal command line.
-3. Next, either use the Heroku deployed site, or run it from your browser using 'http://localhost:3000'.
+3. Next, you can run it from your own web browser: first, open the folder "Scraping2" in your terminal command line; be sure you've installed Axios, Cheero, Express, Handlebars, MongoDB, and Mongoose; then, type in your terminal command line "npm start". Go to your web browser and type in "http://localhost:3000". You can also use the [Heroku deployed site](https://sun-times-scraping.herokuapp.com/) if this is sounding too complicated.
 4. Hit the SCRAPE button
-5. Click on the items you'd like to read, and you'll be directed to The Chicago Sun-Times for the full story. Additionally, under the article, there is a link to leave your personal take on the article. Hit "Submit" to leave your comment. And if you write something naughty, you can delete it! 
+5. Click on the items you'd like to read, and you'll be directed to The Chicago Sun-Times for the full story. Additionally, under the article, there is a link to leave your personal take on the article. Hit "Submit" to leave your comment. And if you write a comment--and then change your mind--you can delete it! 
 
 
 ## Acknowledgements
 
-Much gratitude to Phil Loy for dropping my cohort into the deep end of these projects AND helping us dog-paddle our way out. Isabel Arcones, #1 Tutor of the Digital Age, has had many helpful comments and corrections. Adarsh Bhat is a flat-out boss when it comes to writing code. Stackflow: you confuse and beguile me... sometimes helpful, sometimes not so much? Those crazy kids who developed Bootstrap get all the cake!
+Much gratitude to Phil Loy for dropping my cohort into the deep end of these projects AND helping us dog-paddle our way out. Isabel Arcones, #1 Tutor of the Digital Age, has had many helpful comments and corrections. Stackflow: you confuse and beguile me... sometimes helpful, sometimes not so much? Those crazy kids who developed Bootstrap get all the cake!
 

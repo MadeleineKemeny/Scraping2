@@ -113,7 +113,7 @@ app.get("/api/scrape", (req, res) => {
         });
     
 
-        res.send("<a href ='/'> back to homepage </a> <br> Scrape Complete");
+        res.send("<a href ='/'> SEE THE LATEST NEWS! </a>");
       });
 
 });

@@ -3,10 +3,10 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = function (callback) {
-    console.log("Scraping The Onion...");
+    console.log("Scraping Chicago Sun-Times...");
 
    
-    axios.get("https://www.theonion.com/")
+    axios.get("https://chicago.suntimes.com/")
         .then((response) => {
             console.log("Received " + response.status + " " + response.statusText);
             const html = response.data;
