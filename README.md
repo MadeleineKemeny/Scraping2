@@ -2,9 +2,9 @@
 
 "Scraping" is a technique by which a server grabs data from another website to dynamically populate information on the native site it is serving. 
 
-Scraping2 shows this technique by calling "news" from The Onion by the language in which it is written (HTML), and as well as using Axios and Cheerio, a library that makes jQuery readable by servers.
+Scraping2 shows this technique by calling news from The Chicago Sun-Times by the language in which it is written (HTML), and as well as using Axios and Cheerio, a library that makes jQuery readable by servers.
 
-The "news" from The Onion is scraped and held in a MongoDB database; Mongoose assists in creating that database and curating that information on the fly.
+The news is scraped and held in a MongoDB database; Mongoose assists in creating that database and curating that information on the fly.
 
 
 ## The Totality of Tech
@@ -26,15 +26,14 @@ The following languages, libraries, dependencies, databases and frameworks make 
 
 ## Test Drive It
 
-Not because I did this assignment, but because The Onion is awesome is the true reason you should give it try!
-
 1. Clone the repo to your computer.
 2. Have all the bits and pieces listed above; some are actual downloads, some are simply accessed by running "npm install" in your terminal command line.
 3. Next, either use the Heroku deployed site, or run it from your browser using 'http://localhost:3000'.
-4. Click on the items you'd like to read, and you'll be directed to The Onion for the full story. Additionally, under the article, there is a link to leave your personal take on the general silliness they offer. Hit "Submit" so other people will know you're silly, too, and that other conoisseurs of Fake News have trodden that link (it keeps a running tally of comments). And if you write something naughty, you can delete it! 
+4. Hit the SCRAPE button
+5. Click on the items you'd like to read, and you'll be directed to The Chicago Sun-Times for the full story. Additionally, under the article, there is a link to leave your personal take on the article. Hit "Submit" to leave your comment. And if you write something naughty, you can delete it! 
 
 
 ## Acknowledgements
 
-Much gratitude to Phil Loy for dropping my cohort into the deep end of these projects AND helping us dog-paddle our way out. Isabel Arcones, #1 Tutor of the Digital Age, has had many helpful comments and corrections. Adarsh Bhat is a flat-out boss when it comes to writing code. Stackflow: you confuse and beguile me... sometimes helpful, sometimes not so much? Those crazy kids who developed Bootstrap get all the cake, and the folks writing at The Onion--serving up the ultimate in nuttiness every day, rain or shine--make each day a good day!
+Much gratitude to Phil Loy for dropping my cohort into the deep end of these projects AND helping us dog-paddle our way out. Isabel Arcones, #1 Tutor of the Digital Age, has had many helpful comments and corrections. Adarsh Bhat is a flat-out boss when it comes to writing code. Stackflow: you confuse and beguile me... sometimes helpful, sometimes not so much? Those crazy kids who developed Bootstrap get all the cake!
 
