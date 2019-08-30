@@ -30,7 +30,7 @@ The following languages, libraries, dependencies, databases and frameworks make 
 2. Have all the bits and pieces listed above; some are actual downloads, some are simply accessed by running "npm install" in your terminal command line.
 3. Next, you can run it from your own web browser: first, open the folder "Scraping2" in your terminal command line; be sure you've installed Axios, Cheero, Express, Handlebars, MongoDB, and Mongoose; then, type in your terminal command line "npm start". Go to your web browser and type in "http://localhost:3000". You can also use the [Heroku deployed site](https://sun-times-scraping.herokuapp.com/) if this is sounding too complicated.
 4. Hit the SCRAPE button
-5. Click on the items you'd like to read, and you'll be directed to The Chicago Sun-Times for the full story. Additionally, under the article, there is a link to leave your personal take on the article. Hit "Submit" to leave your comment. And if you write a comment--and then change your mind--you can delete it! 
+5. Click on the items you'd like to read, and you'll be directed to The Chicago Sun-Times for the full story. Use your browser "back" button to return to the summaries. Additionally, under the article summary on Scraping2, there is a link to leave your personal take on the article. Hit "Submit" to leave your comment. And if you write a comment--and then change your mind--you can delete it! 
 
 
 ## Acknowledgements
