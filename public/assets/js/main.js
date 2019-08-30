@@ -1,4 +1,5 @@
-function scrape() {
+$("#submit").on("click",
+function () {
     $.ajax({
         url: "/api/scrape",
         method: "POST"
@@ -7,7 +8,7 @@ function scrape() {
         location.reload();
     });
 }
-
+)
 
 function deleteComment(newsId, commentId) {
     $.ajax({
