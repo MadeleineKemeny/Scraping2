@@ -2,7 +2,9 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
-const theonion = require("./theonion");
+const axios = require("axios");
+const cheerio = require("cheerio");
+
 const dB = require("./models");
 const app = express();
 
@@ -17,16 +19,18 @@ app.set('view engine', 'handlebars');
 // db
 const MONGODB_ONION = process.env.MONGODB_ONION || 'mongodb://localhost/theonion';
 mongoose.connect(MONGODB_ONION, {useNewUrlParser: true});
-// const Item = models.Item;
-// const Comment = models.Comment;
 
 // routes
 app.get('/', (req, res) => {
-    Item.find({}).sort({ date: -1 })
+    dB.News.find({}).sort({ date: -1 })
         .then((items) => {
+            console.log(items)
+
             res.render('index', {
-                items: items
+                news: items
             })
+
+       
         })
 });
 
@@ -44,11 +48,9 @@ app.post('/items/:id/comments', (req, res) => {
     const itemId = req.params.id;
     const commentText = req.body.text;
 
-    // to leave a comment
     Comment.create({ text: commentText, date: new Date() })
         .then((comment) => {
-            // if created successfully, attach to correct item with comment's id to the items' `comments` array
-            // { new: true } return the updated items (returns the original by default)
+
 
             return Item.findByIdAndUpdate(itemId, { $push: { comments: comment._id } }, { new: true })
         })
@@ -71,25 +73,48 @@ app.delete('/items/:itemId/comments/:commentId', (req, res) => {
 
 
 app.get("/api/scrape", (req, res) => {
-    theonion(function (localNews) {
 
-        // add all news items to db
-        News.insertMany(localNews, { ordered: false }, function (err, items) {
-            if (!err) {
-                console.log("News items inserted: " + items.length);
-                res.json({ count: items.length });
-            }
-            else if (err.result.ok) {
-                // avoiding duplicates
-                console.log("News items inserted: " + err.result.nInserted);
-                res.json({ count: err.result.nInserted });
-            }
-            else {
-                console.log(response);
-                res.staus(500).json(response.result);
-            }
-        })
-    });
+
+    axios.get("https://chicago.suntimes.com/").then(function(response) {
+
+        var $ = cheerio.load(response.data);
+    
+        $("div.c-compact-river__entry").each(function(i, element) {
+     
+          var result = {};
+    
+   
+          result.headline = $(this)
+          .find("div.c-entry-box--compact__body")
+          .find("h2.c-entry-box--compact__title")
+          .children("a")
+          .text();
+          result.url = $(this)
+          .find("div.c-entry-box--compact__body")
+          .find("h2.c-entry-box--compact__title")
+          .children("a")
+          .attr("href");
+    
+          result.description = $(this)
+          .find("div.c-entry-box--compact__body")
+          .find("p.p-dek")
+          .text();
+
+          dB.News.create(result)
+            .then(function(dbArticle) {
+ 
+              console.log(dbArticle);
+            })
+            .catch(function(err) {
+  
+              console.log(err);
+            });
+        });
+    
+
+        res.send("Scrape Complete");
+      });
+
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 
 const articleSchema = new mongoose.Schema({
-    heading: String,
+    headline: String,
     description: String,
-    date: Date,
+    date: {
+        type: Date,
+        default: Date.now
+      },
     url: {
         type: String,
         unique: true
