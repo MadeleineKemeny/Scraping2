@@ -17,8 +17,9 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 // db
-const MONGODB_ONION = process.env.MONGODB_ONION || 'mongodb://localhost/theonion';
-mongoose.connect(MONGODB_ONION, {useNewUrlParser: true});
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// you need to store it in a variable
+mongoose.connect(MONGODB_URI);;
 
 // routes
 app.get('/', (req, res) => {
