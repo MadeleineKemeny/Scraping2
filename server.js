@@ -113,7 +113,7 @@ app.get("/api/scrape", (req, res) => {
         });
     
 
-        res.send("<a href ='/'> SEE THE LATEST NEWS! </a>");
+        res.send("<a href ='/'><img src='../assets/img/newsboy.png'></a>");
       });
 
 });
