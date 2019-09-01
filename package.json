@@ -1,7 +1,7 @@
 {
   "name": "Scraping2",
   "version": "1.0.0",
-  "description": "",
+  "description": "\"Scraping\" is a technique by which a server grabs data from another website to dynamically populate information on the native site it is serving.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

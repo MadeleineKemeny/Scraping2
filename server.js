@@ -36,37 +36,37 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/items/:id', (req, res) => {
+app.get('/news/:id', (req, res) => {
     const id = req.params.id;
-    Item.findById(id).populate("comments").exec()
+    dB.News
+        .findById(id)
+        .populate("comments")
         .then((item) => {
             res.render("details", item);
         });
 });
 
 
-app.post('/items/:id/comments', (req, res) => {
+app.post('/news/:id/comments', (req, res) => {
     const itemId = req.params.id;
     const commentText = req.body.text;
 
-    Comment.create({ text: commentText, date: new Date() })
+    dB.Comment.create({ text: commentText, date: new Date() })
         .then((comment) => {
-
-
-            return Item.findByIdAndUpdate(itemId, { $push: { comments: comment._id } }, { new: true })
+            return dB.News.findByIdAndUpdate(itemId, { $push: { comments: comment._id } }, { new: true })
         })
-        .then((item) => {
-            res.redirect("/items/" + itemId);
+        .then(() => {
+            res.redirect("/news/" + itemId);
         })
 });
 
-app.delete('/items/:itemId/comments/:commentId', (req, res) => {
+app.delete('/news/:itemId/comments/:commentId', (req, res) => {
     const itemId = req.params.itemId;
     const commentId = req.params.commentId;
 
-    Article.findByIdAndUpdate(itemsId, { $pull: { comments: commentId } })
+    dB.News.findByIdAndUpdate(itemId, { $pull: { comments: commentId } })
         .then(() => {
-            Comment.findByIdAndDelete(commentId)
+            dB.Comment.findByIdAndDelete(commentId)
                 .then(() => res.sendStatus(200));
         })
 
